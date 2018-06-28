@@ -172,8 +172,8 @@ export const NODE_CONFIGS: { [key in StaticNetworkIds]: RawNodeConfig[] } = {
     {
       name: makeNodeName('RSK', 'rsk_mainnet'),
       type: 'rpc',
-      service: '',
-      url: ''
+      service: 'mycrypto.rsk.co',
+      url: 'https://mycrypto.rsk.co/'
     }
   ],
 

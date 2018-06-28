@@ -380,8 +380,8 @@ export const STATIC_NETWORKS_INITIAL_STATE: StaticNetworksState = {
       name: 'RSK Explorer',
       origin: 'https://explorer.rsk.co'
     }),
-    tokens: require('config/tokens/rsk.json'),
-    contracts: require('config/contracts/rsk.json'),
+    tokens: require('config/tokens/rsk_mainnet.json'),
+    contracts: require('config/contracts/rsk_mainnet.json'),
     isTestnet: false,
     dPathFormats: {
       [SecureWalletName.TREZOR]: RSK_MAINNET,
