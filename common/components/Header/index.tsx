@@ -94,6 +94,7 @@ class Header extends Component<Props, State> {
                 width="245px"
                 alt="MyCrypto logo"
               />
+              <span className="Header-RSK"> & RSK</span>
             </Link>
             <div className="Header-branding-right">
               <div className="Header-branding-right-online">
