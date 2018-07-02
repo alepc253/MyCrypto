@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import translate, { translateRaw } from 'translations';
+import translate from 'translations';
 import { NodeConfig } from 'types/node';
 import { NetworkConfig } from 'types/network';
 import { AppState } from 'features/reducers';
@@ -67,7 +67,7 @@ class NetworkSelector extends React.Component<Props> {
 
   public render() {
     const { allNodes, allNetworks, node } = this.props;
-    const { expandedNetwork, isShowingAltNetworks } = this.state;
+    const { expandedNetwork } = this.state;
 
     const nodesByNetwork = {} as {
       [network: string]: NodeConfig[];
@@ -111,13 +111,6 @@ class NetworkSelector extends React.Component<Props> {
     return (
       <div className="NetworkSelector">
         {options.core}
-        <button className="NetworkSelector-alts" onClick={this.toggleShowAltNetworks}>
-          <i className="fa fa-flask" />
-          {translate(isShowingAltNetworks ? 'HIDE_THING' : 'SHOW_THING', {
-            $thing: translateRaw('NETWORKS_ALTERNATIVE')
-          })}
-        </button>
-        {isShowingAltNetworks && options.alt}
         <button className="NetworkSelector-add" onClick={this.props.openCustomNodeModal}>
           <i className="fa fa-plus" />
           {translate('NODE_ADD')}
@@ -153,10 +146,6 @@ class NetworkSelector extends React.Component<Props> {
     this.setState({
       expandedNetwork: network === this.state.expandedNetwork ? null : network
     });
-  };
-
-  private toggleShowAltNetworks = () => {
-    this.setState({ isShowingAltNetworks: !this.state.isShowingAltNetworks });
   };
 }
 
