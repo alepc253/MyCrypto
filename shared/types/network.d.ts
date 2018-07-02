@@ -1,23 +1,4 @@
-type StaticNetworkIds =
-  | 'ETH'
-  | 'Ropsten'
-  | 'Kovan'
-  | 'Rinkeby'
-  | 'ETC'
-  | 'UBQ'
-  | 'EXP'
-  | 'POA'
-  | 'TOMO'
-  | 'ELLA'
-  | 'MUSIC'
-  | 'ETSC'
-  | 'EGEM'
-  | 'CLO'
-  | 'RSK'
-  | 'RSK_TESTNET'
-  | 'GO'
-  | 'EOSC'
-  | 'ESN';
+type StaticNetworkIds = 'RSK' | 'RSK_TESTNET';
 
 export interface BlockExplorerConfig {
   name: string;

@@ -36,7 +36,9 @@ export default class NetworkOption extends React.PureComponent<Props> {
               'is-specific-node': isNetworkSelected && !isAutoSelected && singleNodes.length > 1,
               'is-long-name': isLongName
             })}
-            title={translateRaw('NETWORKS_SWITCH', { $network: network.name })}
+            title={translateRaw('NETWORKS_SWITCH', {
+              $network: network.name
+            })}
             onClick={this.handleSelect}
           >
             {network.name}
