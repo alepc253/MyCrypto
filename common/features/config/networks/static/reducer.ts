@@ -1,19 +1,7 @@
-import {
-  ethPlorer,
-  ETHTokenExplorer,
-  gasPriceDefaults,
-  InsecureWalletName,
-  SecureWalletName
-} from 'config/data';
+import { InsecureWalletName, SecureWalletName } from 'config/data';
 import { RSK_MAINNET, RSK_TESTNET } from 'config/dpaths';
 import { makeExplorer } from 'utils/helpers';
 import { StaticNetworksState } from './types';
-
-const testnetDefaultGasPrice = {
-  min: 0.1,
-  max: 40,
-  initial: 4
-};
 
 export const STATIC_NETWORKS_INITIAL_STATE: StaticNetworksState = {
   RSK: {

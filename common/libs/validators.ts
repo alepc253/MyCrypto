@@ -4,7 +4,7 @@ import WalletAddressValidator from 'wallet-address-validator';
 import { Validator } from 'jsonschema';
 import BN from 'bn.js';
 
-import { dPathRegex, ETC_LEDGER, ETH_SINGULAR } from 'config/dpaths';
+import { dPathRegex } from 'config/dpaths';
 import { translateRaw } from 'translations';
 import { stripHexPrefix } from 'libs/formatters';
 import { isPositiveInteger } from 'utils/helpers';
@@ -149,16 +149,6 @@ export function isPositiveIntegerOrZero(num: number): boolean {
 }
 
 export function isValidPath(dPath: string) {
-  // ETC Ledger is incorrect up due to an extra ' at the end of it
-  if (dPath === ETC_LEDGER.value) {
-    return true;
-  }
-
-  // SingularDTV is incorrect due to using a 0 instead of a 44 as the purpose
-  if (dPath === ETH_SINGULAR.value) {
-    return true;
-  }
-
   return dPathRegex.test(dPath);
 }
 

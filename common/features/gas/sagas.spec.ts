@@ -11,8 +11,8 @@ import * as selectors from './selectors';
 import * as sagas from './sagas';
 
 const networkState = configNetworksStaticReducer.staticNetworksReducer(undefined, {} as any);
-const network = networkState.ETH;
-const nonEstimateNetwork = networkState.ETC;
+const network = networkState.RSK;
+const nonEstimateNetwork = networkState.RSK;
 
 describe('fetchEstimates*', () => {
   const gen = cloneableGenerator(sagas.fetchEstimates)();

@@ -10,7 +10,7 @@ const web3Id = 'web3';
 const web3Node: StaticNodeConfig = {
   id: web3Id,
   isCustom: false,
-  network: 'ETH',
+  network: 'RSK',
   service: Web3Service,
   hidden: true
 };
