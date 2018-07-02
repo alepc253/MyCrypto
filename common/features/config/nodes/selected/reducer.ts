@@ -8,8 +8,8 @@ import {
 } from './types';
 
 export const SELECTED_NODE_INITIAL_STATE: State = {
-  nodeId: makeAutoNodeName('ETH'),
-  prevNode: makeAutoNodeName('ETH'),
+  nodeId: makeAutoNodeName('RSK'),
+  prevNode: makeAutoNodeName('RSK'),
   pending: false
 };
 
