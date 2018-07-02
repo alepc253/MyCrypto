@@ -18,7 +18,8 @@ export const navigationLinks: NavigationLink[] = [
   },
   {
     name: 'NAV_SWAP',
-    to: '/swap'
+    to: '/swap',
+    disabled: true
   },
   {
     name: 'NAV_CONTRACTS',
@@ -26,7 +27,8 @@ export const navigationLinks: NavigationLink[] = [
   },
   {
     name: 'NAV_ENS',
-    to: '/ens'
+    to: '/ens',
+    disabled: true
   },
   {
     name: 'NAV_SIGN',
