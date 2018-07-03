@@ -18,6 +18,10 @@ const DisclaimerModal: React.SFC<Props> = ({ isOpen, handleClose }) => {
   return (
     <Modal isOpen={isOpen} title="Disclaimer" buttons={buttons} handleClose={handleClose}>
       <p>
+        <b>RSK backup:</b>
+        This is an RSK backup of the original MyCrypto site. It only contians RSK network.
+      </p>
+      <p>
         <b>Be safe & secure: </b>
         <HelpLink article={HELP_ARTICLE.SECURING_YOUR_ETH}>
           We highly recommend that you read our guide on How to Prevent Loss & Theft for some
