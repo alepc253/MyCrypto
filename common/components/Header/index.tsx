@@ -78,12 +78,6 @@ class Header extends Component<Props, State> {
 
     return (
       <div className="Header">
-        {ANNOUNCEMENT_MESSAGE && (
-          <div className={`Header-announcement is-${ANNOUNCEMENT_TYPE}`}>
-            {ANNOUNCEMENT_MESSAGE}
-          </div>
-        )}
-
         <section className="Header-branding">
           <section className="Header-branding-inner container">
             <Link to="/" className="Header-branding-title" aria-label="Go to homepage">
