@@ -75,6 +75,7 @@ export default class Footer extends React.PureComponent<Props, State> {
                 width="auto"
                 alt="MyCrypto logo"
               />
+              <span className="Footer-RSK"> & RSK</span>
             </NewTabLink>
 
             <div className="Footer-about-links">

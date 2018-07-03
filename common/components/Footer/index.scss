@@ -30,6 +30,10 @@ $footer-link-color: color(text-color-inverted);
     order: 3;
     text-align: right;
   }
+  &-RSK {
+    color: #fafafa;
+    font-size: 28px;
+  }
 
   @media (max-width: 75rem) {
     justify-content: center;
