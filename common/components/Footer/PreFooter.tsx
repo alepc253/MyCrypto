@@ -12,7 +12,10 @@ const PreFooter: React.SFC<Props> = ({ openModal }) => {
     <section className="pre-footer">
       <div className="container">
         <p>
-          {translate('PREFOOTER_WARNING')}{' '}
+          {translate('PREFOOTER_WARNING')}
+          {'  '}
+          {translate('PREFOOTER_RSK')}
+          {'  '}
           <a onClick={openModal}>{translateRaw('PREFOOTER_SECURITY_WARNING')}</a>
         </p>
       </div>
