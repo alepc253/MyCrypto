@@ -10,7 +10,9 @@ describe('customTokens reducer', () => {
   it('handles resolveDomainRequested', () => {
     const ensName = 'ensName';
 
-    expect(reducer.ensReducer(undefined as any, actions.resolveDomainRequested(ensName))).toEqual({
+    expect(
+      reducer.ensReducer(undefined as any, actions.resolveDomainRequested(ensName, 'eth'))
+    ).toEqual({
       ...INITIAL_STATE,
       domainRequests: { ensName: { state: 'PENDING' } },
       domainSelector: { currentDomain: 'ensName' }

@@ -77,7 +77,7 @@ class NameInput extends Component<Props, State> {
   private onSubmit = (ev: React.FormEvent<HTMLElement>) => {
     ev.preventDefault();
     const { isValidDomain, domainToCheck } = this.state;
-    return isValidDomain && this.props.resolveDomainRequested(domainToCheck);
+    return isValidDomain && this.props.resolveDomainRequested(domainToCheck, 'eth');
   };
 
   private onFocus = () => this.setState({ isFocused: true });

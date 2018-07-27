@@ -16,12 +16,15 @@ import { CallbackProps } from 'components/AddressFieldFactory';
 import AddressFieldDropdown from './AddressFieldDropdown';
 import './AddressInputFactory.scss';
 
+import * as configSelectors from 'features/config/selectors';
+
 interface StateProps {
   currentTo: ICurrentTo;
   label: string | null;
   isValid: boolean;
   isLabelEntry: boolean;
   isResolving: boolean;
+  chainId: number;
 }
 
 interface OwnProps {
@@ -34,13 +37,17 @@ interface OwnProps {
   withProps(props: CallbackProps): React.ReactElement<any> | null;
 }
 
-const ENSStatus: React.SFC<{ isLoading: boolean; ensAddress: string; rawAddress: string }> = ({
-  isLoading,
-  ensAddress,
-  rawAddress
-}) => {
+const ENSStatus: React.SFC<{
+  isLoading: boolean;
+  ensAddress: string;
+  rawAddress: string;
+  chainId: number;
+}> = ({ isLoading, ensAddress, rawAddress, chainId }) => {
   const isENS = isValidENSAddress(ensAddress);
-  const text = translate('LOADING_ENS_ADDRESS');
+  const text =
+    chainId === 30 || chainId === 31
+      ? translate('LOADING_RNS_ADDRESS')
+      : translate('LOADING_ENS_ADDRESS');
 
   if (isLoading) {
     return (
@@ -56,6 +63,16 @@ const ENSStatus: React.SFC<{ isLoading: boolean; ensAddress: string; rawAddress:
 type Props = OwnProps & StateProps;
 
 class AddressInputFactoryClass extends Component<Props> {
+  private getIsENSAddress(name: string) {
+    const { chainId } = this.props;
+
+    if (chainId === 30 || chainId === 31) {
+      return name.includes('.rif') || name.includes('.rsk') || name.includes('.iov');
+    }
+
+    return name.includes('.eth');
+  }
+
   public render() {
     const {
       label,
@@ -75,7 +92,7 @@ class AddressInputFactoryClass extends Component<Props> {
     const addr = addHexPrefix(value ? value.toString('hex') : '0');
     const inputClassName = `AddressInput-input ${label ? 'AddressInput-input-with-label' : ''}`;
     const sendingTo = `${translateRaw('SENDING_TO')} ${label}`;
-    const isENSAddress = currentTo.raw.includes('.eth');
+    const isENSAddress = this.getIsENSAddress(currentTo.raw);
 
     return (
       <div className="AddressInput form-group">
@@ -94,7 +111,12 @@ class AddressInputFactoryClass extends Component<Props> {
               })
             }
           />
-          <ENSStatus ensAddress={currentTo.raw} isLoading={isResolving} rawAddress={addr} />
+          <ENSStatus
+            ensAddress={currentTo.raw}
+            isLoading={isResolving}
+            rawAddress={addr}
+            chainId={this.props.chainId}
+          />
           {isFocused && !isENSAddress && <AddressFieldDropdown />}
           {showLabelMatch &&
             label && (
@@ -129,6 +151,7 @@ export const AddressInputFactory = connect((state: AppState, ownProps: OwnProps)
     label: selectors.getCurrentToLabel(state),
     isResolving: ensSelectors.getResolvingDomain(state),
     isValid: selectors.isValidCurrentTo(state),
-    isLabelEntry: selectors.isCurrentToLabelEntry(state)
+    isLabelEntry: selectors.isCurrentToLabelEntry(state),
+    chainId: configSelectors.getNetworkChainId(state)
   };
 })(AddressInputFactoryClass);

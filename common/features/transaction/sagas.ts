@@ -52,8 +52,9 @@ export function* setCurrentToSaga({ payload: raw }: types.SetCurrentToAction): S
   } else if (validEns) {
     yield call(setField, { value, raw });
 
-    const [domain] = raw.split('.');
-    yield put(ensActions.resolveDomainRequested(domain));
+    const suffix: string = raw.indexOf('.') > -1 ? raw.split('.')[raw.split('.').length - 1] : '';
+    const domain: string = raw.replace('.' + suffix, '');
+    yield put(ensActions.resolveDomainRequested(domain, suffix));
     yield take([
       ensTypes.ENSActions.RESOLVE_DOMAIN_FAILED,
       ensTypes.ENSActions.RESOLVE_DOMAIN_SUCCEEDED,

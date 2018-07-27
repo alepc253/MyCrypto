@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "address": "0xda02821f83347bdb839f7ce45281ddf6632b3b38",
+        "symbol": "ACT",
+        "decimal": 4,
+        "type": "contract"
+    },
+    {
+        "address": "0x4b49beb649e9e1fb39410b059cc83c7da6d9d2cd",
+        "symbol": "PIC",
+        "decimal": 18,
+        "type": "contract"
+    }
+]

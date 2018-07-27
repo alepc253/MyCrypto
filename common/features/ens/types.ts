@@ -16,7 +16,7 @@ export enum ENSActions {
 
 export interface ResolveDomainRequested {
   type: ENSActions.RESOLVE_DOMAIN_REQUESTED;
-  payload: { domain: string };
+  payload: { domain: string; suffix: string };
 }
 
 export interface ResolveDomainSucceeded {

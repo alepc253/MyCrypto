@@ -94,12 +94,12 @@ describe('Validator', () => {
 
 describe('isLabelWithoutENS', () => {
   it('should return false if the label contains an ENS TLD', () => {
-    expect(isLabelWithoutENS('Foo.eth')).toEqual(false);
-    expect(isLabelWithoutENS('Foo.test')).toEqual(false);
-    expect(isLabelWithoutENS('Foo.reverse')).toEqual(false);
+    expect(isLabelWithoutENS('Foo.eth', 1)).toEqual(false);
+    expect(isLabelWithoutENS('Foo.test', 1)).toEqual(false);
+    expect(isLabelWithoutENS('Foo.reverse', 1)).toEqual(false);
   });
   it('should return true if a label does not contain an ENS TLD', () => {
-    expect(isLabelWithoutENS('Foo')).toEqual(true);
+    expect(isLabelWithoutENS('Foo', 1)).toEqual(true);
   });
 });
 

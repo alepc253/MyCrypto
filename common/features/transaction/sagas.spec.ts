@@ -96,7 +96,7 @@ describe('transaction: Sagas', () => {
 
         it('should put resolveDomainRequested', () => {
           expect(data.validEnsGen.next().value).toEqual(
-            put(ensActions.resolveDomainRequested(domain))
+            put(ensActions.resolveDomainRequested(domain, 'eth'))
           );
         });
 

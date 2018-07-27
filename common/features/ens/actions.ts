@@ -2,9 +2,12 @@ import { DomainRequest } from 'libs/ens';
 import * as types from './types';
 
 export type TResolveDomainRequested = typeof resolveDomainRequested;
-export const resolveDomainRequested = (domain: string): types.ResolveDomainRequested => ({
+export const resolveDomainRequested = (
+  domain: string,
+  suffix: string
+): types.ResolveDomainRequested => ({
   type: types.ENSActions.RESOLVE_DOMAIN_REQUESTED,
-  payload: { domain }
+  payload: { domain, suffix }
 });
 
 export const resolveDomainCached = (

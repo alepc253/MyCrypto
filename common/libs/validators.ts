@@ -95,7 +95,10 @@ export function isValidENSAddress(address: string): boolean {
     const validTLDs = {
       eth: true,
       test: true,
-      reverse: true
+      reverse: true,
+      rif: true,
+      rsk: true,
+      iov: true
     };
     if (validTLDs[tld as keyof typeof validTLDs]) {
       return true;
@@ -360,8 +363,9 @@ export function isValidLabelLength(label: string, options: { allowEmpty?: boolea
   return meetsMinimumLengthRequirement && meetsMaximumLengthRequirement;
 }
 
-export function isLabelWithoutENS(label: string): boolean {
-  const ensTlds = ['.eth', '.test', '.reverse'];
+export function isLabelWithoutENS(label: string, chainId: number): boolean {
+  const ensTlds =
+    chainId === 30 || chainId === 31 ? ['.rif', '.rsk', '.iov'] : ['.eth', '.test', '.reverse'];
 
   for (const tld of ensTlds) {
     if (label.includes(tld)) {
@@ -397,8 +401,11 @@ export function isValidAddressLabel(
     result.labelError = translateRaw('INVALID_LABEL_LENGTH');
   }
 
-  if (!isLabelWithoutENS(label)) {
-    result.labelError = translateRaw('LABEL_CANNOT_CONTAIN_ENS_SUFFIX');
+  if (!isLabelWithoutENS(label, chainId)) {
+    result.labelError =
+      chainId === 30 || chainId === 31
+        ? translateRaw('LABEL_CANNOT_CONTAIN_RNS_SUFFIX')
+        : translateRaw('LABEL_CANNOT_CONTAIN_ENS_SUFFIX');
   }
 
   if (labelAlreadyExists) {

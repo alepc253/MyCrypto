@@ -7,6 +7,8 @@ import { INode } from 'libs/nodes/INode';
 import ENS from 'libs/ens/contracts';
 import { IDomainData, NameState, getNameHash, IBaseDomainRequest } from 'libs/ens';
 import * as configNodesSelectors from 'features/config/nodes/selectors';
+import { StaticNetworkConfig } from 'types/network';
+import { getNetworkConfig } from 'features/config/selectors';
 
 //#region Make & Decode
 interface Params {
@@ -23,10 +25,33 @@ export function* makeEthCallAndDecode({ to, data, decoder }: Params): SagaIterat
 }
 //#endregion Make & Decode
 
-//#region Mode Map
-const { main } = networkConfigs;
+//#region Mode Mapropsten
+const { main, rsk_testnet } = networkConfigs;
+
+function getRegistry(chainId: number) {
+  switch (chainId) {
+    case 30:
+      return main.registry;
+    case 31:
+      return rsk_testnet.registry;
+    default:
+      return main.registry;
+  }
+}
+
+function getAuction(chainId: number) {
+  switch (chainId) {
+    case 30:
+      return main.public.ethAuction;
+    case 31:
+      return rsk_testnet.public.ethAuction;
+    default:
+      return main.public.ethAuction;
+  }
+}
 
 function* nameStateOwned({ deedAddress }: IDomainData<NameState.Owned>, nameHash: string) {
+  const { chainId }: StaticNetworkConfig = yield select(getNetworkConfig);
   // Return the owner's address, and the resolved address if it exists
   const { ownerAddress }: typeof ENS.deed.owner.outputType = yield call(makeEthCallAndDecode, {
     to: deedAddress,
@@ -37,7 +62,7 @@ function* nameStateOwned({ deedAddress }: IDomainData<NameState.Owned>, nameHash
   const { resolverAddress }: typeof ENS.registry.resolver.outputType = yield call(
     makeEthCallAndDecode,
     {
-      to: main.registry,
+      to: getRegistry(chainId),
       decoder: ENS.registry.resolver.decodeOutput,
       data: ENS.registry.resolver.encodeInput({
         node: nameHash
@@ -89,15 +114,21 @@ const modeMap: IModeMap = {
   [NameState.NotYetAvailable]: (_: IDomainData<NameState.NotYetAvailable>) => ({})
 };
 
-export function* resolveDomainRequest(name: string): SagaIterator {
+export function* resolveDomainRequest(name: string, suffix: string): SagaIterator {
+  const { chainId }: StaticNetworkConfig = yield select(getNetworkConfig);
   const hash = ethUtil.sha3(name);
-  const nameHash = getNameHash(`${name}.eth`);
+  const nameHash = getNameHash(`${name}.${suffix}`);
 
   const domainData: typeof ENS.auction.entries.outputType = yield call(makeEthCallAndDecode, {
-    to: main.public.ethAuction,
+    to: getAuction(chainId),
     data: ENS.auction.entries.encodeInput({ _hash: hash }),
     decoder: ENS.auction.entries.decodeOutput
   });
+
+  if (chainId === 31 && name.indexOf('.') > -1 && domainData.mode === '0') {
+    domainData.mode = 2; // Force to 'Owned' because MyCrypto doesn't consider subdomains
+  }
+
   const nameStateHandler = modeMap[domainData.mode];
   const result = yield call(nameStateHandler, domainData, nameHash);
 

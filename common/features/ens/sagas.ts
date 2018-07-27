@@ -30,8 +30,7 @@ function* resolveDomain(): SagaIterator {
 
   while (true) {
     const { payload }: types.ResolveDomainRequested = yield take(requestChan);
-
-    const { domain } = payload;
+    const { domain, suffix } = payload;
 
     try {
       const shouldResolve = yield call(shouldResolveDomain, domain);
@@ -43,7 +42,7 @@ function* resolveDomain(): SagaIterator {
       const node: INode = yield select(configNodesSelectors.getNodeLib);
 
       const result: { domainData: IBaseDomainRequest; error: any } = yield race({
-        domainData: call(helpers.resolveDomainRequest, domain, node),
+        domainData: call(helpers.resolveDomainRequest, domain, suffix, node),
         err: call(delay, 10000)
       });
 
