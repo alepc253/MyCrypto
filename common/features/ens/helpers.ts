@@ -26,14 +26,14 @@ export function* makeEthCallAndDecode({ to, data, decoder }: Params): SagaIterat
 //#endregion Make & Decode
 
 //#region Mode Mapropsten
-const { main, rsk_testnet } = networkConfigs;
+const { main, rskTestnet } = networkConfigs;
 
 function getRegistry(chainId: number) {
   switch (chainId) {
     case 30:
       return main.registry;
     case 31:
-      return rsk_testnet.registry;
+      return rskTestnet.registry;
     default:
       return main.registry;
   }
@@ -44,7 +44,7 @@ function getAuction(chainId: number) {
     case 30:
       return main.public.ethAuction;
     case 31:
-      return rsk_testnet.public.ethAuction;
+      return rskTestnet.public.ethAuction;
     default:
       return main.public.ethAuction;
   }

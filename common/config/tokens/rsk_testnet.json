@@ -10,5 +10,11 @@
         "symbol": "PIC",
         "decimal": 18,
         "type": "contract"
+    },
+    {
+        "address": "0x6950a2e61c07a87b46fdbcdd9f57a14838d4f606",
+        "symbol": "RIF",
+        "decimal": 0,
+        "type": "contract"
     }
 ]

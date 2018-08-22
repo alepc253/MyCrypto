@@ -1,8 +1,8 @@
 {
   "public": {
-    "resolver": "0xe1fed7ecf2c117f9c757364080459ba8fa624994",
-    "reverse": "0x623B1BD7DEC44E4561A3B6FB56D5D1E60ECFE610",
-    "ethAuction": "0x508f430aa1e5eef9d664002acfeaac58512f0c42"
+    "resolver": "0x51e92d9ca05bc1b4813c5fbac613bb5f8897f3c8",
+    "reverse": "0x0000000000000000000000000000000000000000",
+    "ethAuction": "0x3740628581e8ed049082155b03302ab09e768efd"
   },
-  "registry": "0xc416f1d1d5556e0fd1188af439781dbfa19639c7"
+  "registry": "0x9079eca3a852dee32be76e29925e43ee50951db2"
 }

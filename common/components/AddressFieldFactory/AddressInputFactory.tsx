@@ -63,16 +63,6 @@ const ENSStatus: React.SFC<{
 type Props = OwnProps & StateProps;
 
 class AddressInputFactoryClass extends Component<Props> {
-  private getIsENSAddress(name: string) {
-    const { chainId } = this.props;
-
-    if (chainId === 30 || chainId === 31) {
-      return name.includes('.rif') || name.includes('.rsk') || name.includes('.iov');
-    }
-
-    return name.includes('.eth');
-  }
-
   public render() {
     const {
       label,
@@ -130,6 +120,16 @@ class AddressInputFactoryClass extends Component<Props> {
         </div>
       </div>
     );
+  }
+
+  private getIsENSAddress(name: string) {
+    const { chainId } = this.props;
+
+    if (chainId === 30 || chainId === 31) {
+      return name.includes('.rif') || name.includes('.rsk') || name.includes('.iov');
+    }
+
+    return name.includes('.eth');
   }
 }
 
