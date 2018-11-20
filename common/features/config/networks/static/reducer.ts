@@ -7,7 +7,7 @@ export const STATIC_NETWORKS_INITIAL_STATE: StaticNetworksState = {
   RSK: {
     id: 'RSK',
     name: 'RSK',
-    unit: 'SBTC',
+    unit: 'RBTC',
     chainId: 30,
     color: '#58A052',
     isCustom: false,
@@ -33,7 +33,7 @@ export const STATIC_NETWORKS_INITIAL_STATE: StaticNetworksState = {
   RSK_TESTNET: {
     id: 'RSK_TESTNET',
     name: 'RSK',
-    unit: 'SBTC',
+    unit: 'RBTC',
     chainId: 31,
     color: '#58A052',
     isCustom: false,
