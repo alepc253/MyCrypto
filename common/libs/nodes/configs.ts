@@ -10,8 +10,8 @@ export const NODE_CONFIGS: { [key in StaticNetworkIds]: RawNodeConfig[] } = {
     {
       name: makeNodeName('RSK', 'rsk_mainnet'),
       type: 'rpc',
-      service: 'mycrypto.rsk.co',
-      url: 'https://mycrypto.rsk.co/'
+      service: 'public-node.rsk.co',
+      url: 'https://public-node.rsk.co/'
     }
   ],
 
@@ -19,8 +19,8 @@ export const NODE_CONFIGS: { [key in StaticNetworkIds]: RawNodeConfig[] } = {
     {
       name: makeNodeName('RSK_TESTNET', 'rsk_testnet'),
       type: 'rpc',
-      service: 'mycrypto.testnet.rsk.co',
-      url: 'https://mycrypto.testnet.rsk.co/'
+      service: 'public-node.testnet.rsk.co',
+      url: 'https://public-node.testnet.rsk.co/'
     }
   ]
 };
